@@ -1,4 +1,4 @@
-import CardWrapper from '../ui/dashboard/cards';
+import CardWrapper from '@/app/ui/dashboard/cards';
 import RevenueChart from '@/app/ui/dashboard/revenue-chart';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { lusitana } from '@/app/ui/fonts';
@@ -7,7 +7,7 @@ import {
   RevenueChartSkeleton,
   LatestInvoicesSkeleton, 
   CardsSkeleton,
-} from '../ui/skeletons';
+} from '@/app/ui/skeletons';
  
 export default async function Page() {
   // const revenue = await fetchRevenue();
