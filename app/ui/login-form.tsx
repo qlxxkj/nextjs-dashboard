@@ -6,9 +6,10 @@ import {
   KeyIcon,
   ExclamationCircleIcon,
 } from '@heroicons/react/24/outline';
-import { Button } from './button';
+import { Button } from './components/button';
 import { useActionState } from 'react';
 import { authenticate } from '@/app/lib/actions';
+import TitansLogo from './titans-logo';
 
 export default function LoginForm() {
   const [errorMessage, formAction, isPending] = useActionState(
@@ -19,14 +20,16 @@ export default function LoginForm() {
   return (
     <form action={formAction} className="space-y-3">
       <div className="flex-1 rounded-lg px-6 pb-4 pt-8">
-        <div className='flex justify-center content-center'>
-            <img className='rounded-full mb-3' src="logor.png" width={80} alt="logo" />
+        
+        <div className='flex justify-center mb-2'>
+          <div className='w-[60px] h-[60px]'>
+              <TitansLogo />
+          </div>
         </div>
-        <div className='flex justify-center font-sans text-white mb-4 text-l'>
-            <span>
-                Sign up or Login with
-            </span>
-        </div>
+        <span className='flex justify-center font-sans text-white text-l mb-5 '>
+          Sign up or Login with
+        </span>
+
 
         <button type="button" className="rounded-xl w-full bg-black-600 text-white flex py-3 px-5 my-3 hover:bg-zinc-600">
             <span className='mr-2'>

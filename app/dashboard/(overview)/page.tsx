@@ -7,7 +7,7 @@ import {
   RevenueChartSkeleton,
   LatestInvoicesSkeleton, 
   CardsSkeleton,
-} from '@/app/ui/skeletons';
+} from '@/app/ui/components/skeletons';
  
 export default async function Page() {
   // const revenue = await fetchRevenue();
