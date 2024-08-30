@@ -7,7 +7,7 @@ import React, {useState, useEffect} from "react";
 import { Button } from "../button";
 
 const Navbar: React.FC = () => {
-    const [isSticky, setIsSticky] = useState(false);
+    const [isSticky, setIsSticky] = useState<boolean>(window.scrollY > 0);
 
     useEffect(() => {
       const handleScroll = () => {
@@ -38,12 +38,6 @@ const Navbar: React.FC = () => {
                             <NavbarLinks />
                          </div>
                         
-                         {/* <Link
-                            href='/login' 
-                            className="flex h-[48px] mx-5 px-5 items-center justify-center rounded-full bg-white/[.15] border border-slate-50/[.15] hover:bg-white hover:text-black-600"
-                        >
-                            <span>Launch App</span>
-                        </Link> */}
                         <Link href="/login" className="flex h-[48px] mx-5 justify-center ">
                           <Button className='w-full rounded-full px-4 text-sm font-medium text-white transition-colors hover:bg-white/[0] hover:text-black-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:bg-white aria-disabled:cursor-not-allowed aria-disabled:opacity-50'>
                             Launch App

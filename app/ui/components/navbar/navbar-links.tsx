@@ -24,7 +24,7 @@ export default function NavbarLinks(){
                      key={link.name}
                      href={link.href}
                      className={clsx(
-                        'flex h-[48px] grow items-center justify-center gap-2 rounded-md mx-5 p-3 text-sm font-medium hover:bg-white hover:text-black-600 md:flex-none md:justify-start md:p-2 md:px-3',
+                        'flex h-[48px] grow items-center justify-center gap-2 rounded-md mx-5 p-3 text-sm font-medium hover:bg-slate-50/[.3] hover:rounded-md hover:text-black-600 hover:transition-all hover:duration-300 md:flex-none md:justify-start md:p-2 md:px-3',
                         {
                             'text-white': pathname === link.href,
                         },

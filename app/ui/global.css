@@ -20,8 +20,3 @@ input[type='number']::-webkit-outer-spin-button {
 html {
   background-color: #000000; /* 黑色背景 */
 }
-
-/* Custom animations */
-.transition {
-  transition: background-color 0.3s, backdrop-filter 0.3s;
-}
