@@ -35,7 +35,7 @@ const Carousel: React.FC<CarouselProps> = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const intervalId = useRef<NodeJS.Timeout | null>(null);
-  
+
   // 初始化 canvas 元素的宽度和高度
   useEffect(() => {
     if (canvasRef.current) {
@@ -56,7 +56,7 @@ const Carousel: React.FC<CarouselProps> = ({
     if (autoPlay) {
       intervalId.current = setInterval(() => {
           const nextIndex = (currentIndex + 1) % buttons.length;
-          setCurrentIndex(nextIndex);  
+          setCurrentIndex(nextIndex);
       }, intervalTime);
     }
   };
@@ -106,7 +106,7 @@ const Carousel: React.FC<CarouselProps> = ({
       <canvas
         id="myCanvas"
         ref={canvasRef}
-        className={`rounded-${borderRadius} w-full h-full bg-slate-50 shadow-[0_0_9.697px_0_rgba(0, 0, 0, 0.16)]`}
+        className={`rounded-${borderRadius} w-full h-full bg-slate-50/[0] shadow-[0_0_9.697px_0_rgba(0, 0, 0, 0.16)] transition-all duration-300 delay-150 easy-in-out`}
         style={{ width: canvasWidth, height: canvasHeight }}
       />
       {showButtons && (
@@ -115,9 +115,9 @@ const Carousel: React.FC<CarouselProps> = ({
             <button
               key={index}
               className={`
-                px-5 py-3 rounded-full 
+                px-5 py-3 rounded-full
                 ${
-                    index === currentIndex ? 'bg-slate-50/[.3] text-black-400' : 
+                    index === currentIndex ? 'bg-slate-50/[.3] text-black-400' :
                     'hover:bg-slate-50/[.3] hover:rounded-md hover:transition-all hover:duration-500'
                 }
               `}

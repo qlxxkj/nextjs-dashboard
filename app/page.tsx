@@ -61,12 +61,12 @@ export default function Page() {
       <Navbar />
 
       <section className='flex flex-col h-auto py-20 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
-        
+
         <div className='flex'>
             <div className='flex w-full mt-16 mx-48'>
               <div className="flex flex-col gap-8 py-12">
                 <div className="flex flex-col font-sans text-xl text-white md:text-5xl">
-                  <strong>Imagination Unleashed</strong> 
+                  <strong>Imagination Unleashed</strong>
                   <br /><strong>Productivity Focused</strong>
                   <br /><span className='flex text-2xl'>Titans helps design and market teams build great content, together.</span>
                 </div>
@@ -83,7 +83,7 @@ export default function Page() {
               </div>
             </div>
             <div className='right-0'>
-              <Carousel 
+              <Carousel
                 buttons={buttons1}
                 autoPlay={false}
                 mouseHoverSwitch={true}
@@ -94,9 +94,9 @@ export default function Page() {
               />
             </div>
         </div>
-        
+
         <div className='mx-auto p-4 -mt-80'>
-          <Carousel 
+          <Carousel
             buttons={buttons2}
             autoPlay={false}
             mouseHoverSwitch={false}
@@ -112,7 +112,7 @@ export default function Page() {
         <div className="flex grow flex-col gap-4 md:flex-row">
           <div className="flex flex-col justify-center gap-6 rounded-lg px-6 py-10 md:w-2/5 md:px-20">
             <p className={`font-sans text-xl text-white md:text-3xl md:leading-normal`}>
-              <strong>Creativity, Unleashed</strong> 
+              <strong>Creativity, Unleashed</strong>
               <br />AI-Powered Image
               <br />Creation at scale
             </p>
@@ -147,7 +147,7 @@ export default function Page() {
       <div className="flex grow flex-col gap-4 md:flex-row">
           <div className="flex flex-col justify-center gap-6 rounded-lg px-6 py-10 md:w-2/5 md:px-20">
             <p className={`font-sans text-xl text-white md:text-3xl md:leading-normal`}>
-              <strong>Creativity, Unleashed</strong> 
+              <strong>Creativity, Unleashed</strong>
               <br />AI-Powered Image
               <br />Creation at scale
             </p>
