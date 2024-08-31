@@ -7,6 +7,8 @@ type CarouselButton = {
   text: string;
   image: string;
   description: string;
+  link?: string;
+  linkName?: string;
 };
 
 type CarouselProps = {
@@ -16,9 +18,18 @@ type CarouselProps = {
   intervalTime?: number;
   showButtons?: boolean;
   showDescription?: boolean;
+  showLinks?: boolean;
+  showArrows?: boolean;
+  showDots?: boolean;
   canvasWidth?: number;
   canvasHeight?: number;
   borderRadius?: string; // 支持自定义圆角的 prop
+  className?: string;
+  buttonClassName?: string;
+  descriptionClassName?: string;
+  linkClassName?: string;
+  arrowClassName?: string;
+  dotClassName?: string;
 };
 
 const Carousel: React.FC<CarouselProps> = ({
@@ -28,9 +39,18 @@ const Carousel: React.FC<CarouselProps> = ({
   intervalTime = 3000,
   showButtons = true,
   showDescription = true,
+  showLinks = false,
+  showArrows = false,
+  showDots = false,
   canvasWidth = 500,
   canvasHeight = 300,
   borderRadius = '', // 默认圆角
+  className = '',
+  buttonClassName = '',
+  descriptionClassName = '',
+  linkClassName = '',
+  arrowClassName = '',
+  dotClassName = '',
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -44,6 +64,7 @@ const Carousel: React.FC<CarouselProps> = ({
     }
   }, [canvasWidth, canvasHeight]);
 
+  // 点击按钮切换幻灯片
   const handleButtonClick = (index: number) => {
     setCurrentIndex(index);
     if (autoPlay && intervalId.current) {
@@ -52,6 +73,7 @@ const Carousel: React.FC<CarouselProps> = ({
     }
   };
 
+  // 间隔一定时间，自动播放幻灯片
   const startAutoPlay = () =>{
     if (autoPlay) {
       intervalId.current = setInterval(() => {
@@ -84,6 +106,7 @@ const Carousel: React.FC<CarouselProps> = ({
     drawCanvas(buttons[currentIndex].image);
   }, [buttons, currentIndex, canvasWidth, canvasHeight]);
 
+  // 鼠标移入时切换下一页
   const handleMouseEnter = () => {
     if (mouseHoverSwitch) {
       const nextIndex = (currentIndex + 1) % buttons.length;
@@ -101,12 +124,24 @@ const Carousel: React.FC<CarouselProps> = ({
     }
   }, [mouseHoverSwitch, currentIndex, buttons.length]);
 
+// 点击箭头，切换前一页
+  const handlePrev = () => {
+    const prevIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+    setCurrentIndex(prevIndex);
+  };
+
+// 点击箭头，切换下一页
+  const handleNext = () => {
+    const nextIndex = (currentIndex + 1) % buttons.length;
+    setCurrentIndex(nextIndex);
+  };
+
   return (
-    <div className="relative">
+    <div className={`${className}`}>
       <canvas
         id="myCanvas"
         ref={canvasRef}
-        className={`rounded-${borderRadius} w-full h-full bg-slate-50/[0] shadow-[0_0_9.697px_0_rgba(0, 0, 0, 0.16)] transition-all duration-300 delay-150 easy-in-out`}
+        className={`${borderRadius}`}
         style={{ width: canvasWidth, height: canvasHeight }}
       />
       {showButtons && (
@@ -133,6 +168,14 @@ const Carousel: React.FC<CarouselProps> = ({
           {buttons[currentIndex].description}
         </p>
       )}
+        {showLinks && (
+              <a
+                  href={buttons[currentIndex].link || '#'}
+                  className={`${linkClassName }`}
+              >
+                  {buttons[currentIndex].linkName}
+              </a>
+        )}
     </div>
   );
 };

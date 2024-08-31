@@ -32,24 +32,32 @@ export default function Page() {
   ];
   const buttons2 = [
     {
-      text: 'Image',
-      image: '/r1.png',
-      description: 'Design and refine contents with your team, in one shared design file.',
+        text: 'Image',
+        image: '/r1.png',
+        description: 'Design and refine contents with your team, in one shared design file.',
+        link: '/login',
+        linkName: 'Explore Image',
     },
     {
-      text: 'Video',
-      image: '/r2.png',
-      description: 'Give developers the details they need to build efficiently.',
+        text: 'Video',
+        image: '/r2.png',
+        description: 'Give developers the details they need to build efficiently.',
+        link: '/login',
+        linkName: 'Explore Video',
     },
     {
-      text: 'Vioce',
-      image: '/r3.png',
-      description: 'Brainstorm, diagram, and visualize your ideas in a shared online whiteboard.',
+        text: 'Vioce',
+        image: '/r3.png',
+        description: 'Brainstorm, diagram, and visualize your ideas in a shared online whiteboard.',
+        link: '/login',
+        linkName: 'Explore Vioce',
     },
     {
-      text: 'Avatar',
-      image: '/r4.png',
-      description: 'Co-create and design presentations with advanced editing tools and built-in interactivity.',
+        text: 'Avatar',
+        image: '/r4.png',
+        description: 'Co-create and design presentations with advanced editing tools and built-in interactivity.',
+        link: '/login',
+        linkName: 'Explore Avatar',
     },
     // 可以继续添加更多按钮
   ];
@@ -91,6 +99,7 @@ export default function Page() {
                 canvasHeight={825}
                 showButtons = {false}
                 showDescription = {false}
+                className='relative'
               />
             </div>
         </div>
@@ -100,9 +109,13 @@ export default function Page() {
             buttons={buttons2}
             autoPlay={false}
             mouseHoverSwitch={false}
+            showLinks = {true}
             canvasWidth={1540}
             canvasHeight={809}
-            borderRadius='2xl'
+            className='relative w-full h-full bg-slate-50/[0] shadow-[0_0_9.697px_0_rgba(0, 0, 0, 0.16)] transition-all duration-300 delay-150 easy-in-out'
+            borderRadius='rounded-2xl'
+            buttonClassName=''
+            linkClassName='flex justify-center text-white text-2xl my-20 mx-auto p-5'
            />
         </div>
 
