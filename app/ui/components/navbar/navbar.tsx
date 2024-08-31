@@ -7,17 +7,18 @@ import React, {useState, useEffect} from "react";
 import { Button } from "../button";
 
 const Navbar: React.FC = () => {
-    const [isSticky, setIsSticky] = useState<boolean>(window.scrollY > 0);
+    const [isSticky, setIsSticky] = useState<boolean> (false);
 
     useEffect(() => {
       const handleScroll = () => {
         // 根据滚动位置设置isSticky状态
         setIsSticky(window.scrollY > 0);
       };
-  
+
       // 添加滚动监听器
       window.addEventListener('scroll', handleScroll);
-  
+      //组件挂载时立即检查滚动位置
+      handleScroll();
       // 组件卸载时移除监听器
       return () => {
         window.removeEventListener('scroll', handleScroll);
@@ -25,11 +26,11 @@ const Navbar: React.FC = () => {
     }, []); // 空依赖数组表示只在组件挂载时执行
 
       return (
-        <nav className={`flex fixed w-full z-10 top-0 transition-all duration-300 ease-in-out 
+        <nav className={`flex fixed w-full z-10 top-0 transition-all duration-300 ease-in-out
             ${isSticky ? 'bg-black-400 bg-opacity-50' : 'bg-transparent'} backdrop-blur-lg`}>
                  <div className=" mx-auto p-4 sm:px-10">
                     <div className="flex justify-center justify-between text-white font-sans">
-                        
+
                         <div className="flex h-[48px] w-[48px] mr-5">
                             <TitansLogo />
                          </div>
@@ -37,7 +38,7 @@ const Navbar: React.FC = () => {
                          <div className="flex">
                             <NavbarLinks />
                          </div>
-                        
+
                         <Link href="/login" className="flex h-[48px] mx-5 justify-center ">
                           <Button className='w-full rounded-full px-4 text-sm font-medium text-white transition-colors hover:bg-white/[0] hover:text-black-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:bg-white aria-disabled:cursor-not-allowed aria-disabled:opacity-50'>
                             Launch App
