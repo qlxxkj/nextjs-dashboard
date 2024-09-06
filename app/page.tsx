@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from './ui/components/button';
 import Carousel from './ui/components/Carousel';
+import Swiper from './ui/components/swiper';
 
 
 export default function Page() {
@@ -61,7 +62,85 @@ export default function Page() {
     },
     // 可以继续添加更多按钮
   ];
-
+  const button3 = [
+    {
+      text: 'Genarate image with AI',
+      image: '/f1.png',
+      description: 'Instantly create image to explore a bigger option space.',
+      link: '/login',
+      linkName: 'Explore Image',
+      subDescription: 'Instantly create image to explore a bigger option space.',
+      subLink : '/login',
+      subLinkName: 'Lean More',
+  },
+  {
+      text: 'Genarate Video white AI',
+      image: '/f2.png',
+      description: 'Give developers the details they need to build efficiently.',
+      link: '/login',
+      linkName: 'Explore Video',
+      subDescription: 'Give developers the details they need to build efficiently.',
+      subLink : '/login',
+  },
+  {
+      text: 'Convert your text to vioce with AI ',
+      image: '/f3.png',
+      description: 'Brainstorm, diagram, and visualize your ideas in a shared online whiteboard.',
+      link: '/login',
+      linkName: 'Explore Vioce',
+      subDescription: 'Brainstorm, diagram, and visualize your ideas in a shared online whiteboard.',
+      subLink : '/login',
+  },
+  {
+      text: 'Interact with your Avatar everytime',
+      image: '/f4.png',
+      description: 'Co-create and design presentations with advanced editing tools and built-in interactivity.',
+      link: '/login',
+      linkName: 'Explore Avatar',
+      subDescription: 'Co-create and design presentations with advanced editing tools and built-in interactivity.',
+      subLink : '/login',
+  },
+  {
+      text: 'Scale your edits instantly',
+      image: '/f5.png',
+      description: 'Co-create and design presentations with advanced editing tools and built-in interactivity.',
+      link: '/login',
+      linkName: 'Explore Avatar',
+      subDescription: 'Co-create and design presentations with advanced editing tools and built-in interactivity.',
+      subLink : '/login',
+  },
+  ];
+const items = [
+  { 
+    id: 1, 
+    image: '/L1.png',
+    title: 'Design systems that scale. ', 
+    text: 'Streamline the product development process with a design system that’s aligned across design and code.',
+    link: '/login'
+},
+  { 
+    id: 2, 
+    image: '/L2.png',
+    title: 'Keep design and code connected. ', 
+    text: 'Bring your component code into Dev Mode so developers get the right code, every time.',
+    link: '/login'
+},
+  { 
+    id: 3, 
+    image: '/L3.png', 
+    title: 'Focus on the details in Focus View. ',
+    text: 'Select and inspect a specific design in Dev Mode, then dig into the details in Focus View so you know exactly what to build.',
+    link: '/login'
+},
+  {
+    id: 4, 
+    image: '/L4.png', 
+    title: 'Track progress with design statuses. ',
+    text: 'Stay informed with clear design status updates on what’s changed, completed, or ready to build—all in Dev Mode.',
+    link: '/login'
+},
+  // Add more items as needed
+]
 
   return (
     <main className="flex min-h-screen flex-col">
@@ -104,7 +183,7 @@ export default function Page() {
             </div>
         </div>
 
-        <div className='mx-auto p-4 -mt-80'>
+        <div className='relative mx-auto p-4 -mt-80'>
           <Carousel
             buttons={buttons2}
             autoPlay={false}
@@ -112,85 +191,105 @@ export default function Page() {
             showLinks = {true}
             canvasWidth={1540}
             canvasHeight={809}
-            className='relative w-full h-full bg-slate-50/[0] shadow-[0_0_9.697px_0_rgba(0, 0, 0, 0.16)] transition-all duration-300 delay-150 easy-in-out'
+            className='bg-slate-50/[0] shadow-[0_0_9.697px_0_rgba(0, 0, 0, 0.16)] transition-all duration-300 delay-150 easy-in-out'
             borderRadius='rounded-2xl'
-            buttonClassName=''
-            linkClassName='flex justify-center text-white text-2xl my-20 mx-auto p-5'
+            buttonLayout='flex flex-row justify-center gap-3 my-8 cursor-pointer'
+            buttonClassName='text-white px-5 py-3 rounded-full'
+            buttonSelected='text-black bg-slate-50/[.3]'
+            buttonHover='hover:bg-slate-50/[.3] hover:rounded-md hover:transition-all hover:duration-500'
+            descriptionSelected='flex justify-center text-white text-2xl'
+            linkClassName='flex justify-center text-white text-2xl my-16 p-2'
            />
         </div>
 
       </section>
 
-      <section className=''>
-        <div className="flex grow flex-col gap-4 md:flex-row">
-          <div className="flex flex-col justify-center gap-6 rounded-lg px-6 py-10 md:w-2/5 md:px-20">
-            <p className={`font-sans text-xl text-white md:text-3xl md:leading-normal`}>
-              <strong>Creativity, Unleashed</strong>
-              <br />AI-Powered Image
-              <br />Creation at scale
-            </p>
-            <Link
-              href="/login"
-              className="flex items-center gap-5 self-start rounded-full bg-black-400 bg-opactity-50 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-400 hover:text-blue-600 md:text-base"
-            >
-              <span>Get started</span>
-            </Link>
+      <section className="block bg-[#CB9FD2] pt-40">
+        <div className="pl-40">
+          <div className="md:flex-1 grid grid-cols-2 gap-48">
+            <div className="font-sans text-5xl ">
+              <h2>Redesign how you design.</h2>
+              <p>Explore your ideas freely and iterate quickly.</p>
+            </div>
           </div>
-          <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-            {/* Add Hero Images Here */}
-            <Image
-              src="/treeman.png"
-              width={1000}
-              height={760}
-              className="hidden md:block"
-              alt="Screenshots of the dashboard project showing desktop version"
-            />
-            <Image
-              src="/treeman.png"
-              width={560}
-              height={620}
-              className="block md:hidden"
-              alt="Screenshot of the dashboard project showing mobile version"
+          <div className='relative mt-20'>
+            <Carousel   
+              buttons={button3}
+              autoPlay = {false}
+              mouseHoverSwitch={false}
+              showLinks = {false}
+              showButtons = {true}
+              showDescription = {false}
+              showSubDescription = {true}
+              canvasWidth={908}
+              canvasHeight={726}
+              className='flex transition-opacity delay-700 ease-in-out'
+              canvasLayout='absolute right-0 bottom-0'
+              buttonLayout='flex flex-col mb-40 w-2/5 font-bold cursor-pointer'
+              buttonClassName='text-2xl py-8 border-b border-b-current'
+              buttonSelected='flex flex-col h-2/5 gap-2'
+              subDescriptionStyle='flex flex-col font-light gap-2 '
+              subDescriptionClass = 'text-2xl '
+              subLinkClass='text-xl underline decoration-0 underline-offset-8'
             />
           </div>
         </div>
+
+
+
       </section>
 
-      <section className='bg-gray-600'>
-      <div className="flex grow flex-col gap-4 md:flex-row">
-          <div className="flex flex-col justify-center gap-6 rounded-lg px-6 py-10 md:w-2/5 md:px-20">
-            <p className={`font-sans text-xl text-white md:text-3xl md:leading-normal`}>
-              <strong>Creativity, Unleashed</strong>
-              <br />AI-Powered Image
-              <br />Creation at scale
-            </p>
-            <Link
-              href="/login"
-              className="flex items-center gap-5 self-start rounded-full bg-black-400 bg-opactity-50 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-400 hover:text-blue-600 md:text-base"
-            >
-              <span>Get started</span>
-            </Link>
+      <section className='flex flex-col h-auto py-40 px-40 bg-[#F3FFE3] font-sans overflow-hidden'>
+ 
+        <div className="flex justify-center w-4/6">
+          <div className="text-6xl ">
+            <h2>Bring design and dev together.</h2>
+            <p>Easily translate designs into code with a workflow built for developers.</p>
           </div>
-          <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-            {/* Add Hero Images Here */}
-            <Image
-              src="/FemaleAdventurer1.png"
-              width={1000}
-              height={760}
-              className="hidden md:block"
-              alt="Screenshots of the dashboard project showing desktop version"
-            />
-            <Image
-              src="/treeman.png"
-              width={560}
-              height={620}
-              className="block md:hidden"
-              alt="Screenshot of the dashboard project showing mobile version"
-            />
-          </div>
+        </div>
+
+        <div className="">
+          <Swiper 
+           items={items}
+          />
         </div>
       </section>
 
+      <section className='flex flex-col h-auto py-40 px-40 bg-[#E4FF97] font-sans'>
+        <div className="flex w-2/3">
+            <div className="text-6xl leading-tight">
+              <h2 className='font-medium'>Build better products, together.</h2>
+              <p>Everything your team needs to brainstorm, design, and build.</p>
+            </div>
+        </div>
+        <div className='relative my-20'>
+            <Carousel
+              buttons={buttons2}
+              autoPlay={true}
+              mouseHoverSwitch={false}
+              showLinks = {false}
+              showButtons ={false}
+              showDescription ={false}
+              canvasWidth={1540}
+              canvasHeight={809}
+              className='bg-slate-50/[0] shadow-[0_0_9.697px_0_rgba(0, 0, 0, 0.16)] transition-all duration-300 delay-150 easy-in-out'
+            />
+        </div>
+        <div className='flex flex-row gap-20 text-2xl '>
+          <div className="flex w-2/5">     
+              <p>
+                <b>Create one source of truth.</b>
+                Everyone can collaborate seamlessly in one shared file. Designers, developers, copywriters—even external contractors and clients.
+              </p>
+          </div>
+          <div className="flex w-2/5">
+              <p>
+                <b>Talk. Chat. Comment.</b>
+                Communicate via audio or chat to connect quickly within your file. Gather and keep track of feedback with comments.
+              </p>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

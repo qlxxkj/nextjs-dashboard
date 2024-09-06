@@ -25,7 +25,14 @@ const config: Config = {
         }
       },
     },
+    animation: {
+      'slide-in': 'slide-in 0.5s ease-in-out forwards',
+    },
     keyframes: {
+      'slide-in': {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
       shimmer: {
         '100%': {
           transform: 'translateX(100%)',

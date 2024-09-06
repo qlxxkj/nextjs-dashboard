@@ -115,7 +115,7 @@ export default function LoginForm() {
             <div className='mt-5 text-indigo-600 hover:text-gray-400'>
                 <a href="http://">Forgot your password ?</a>
             </div>
-            <Button className="mt-6 w-full h-12 justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:bg-blend-hard-light" aria-disabled={isPending}>
+            <Button className="mt-6 w-full rounded-md h-12 justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:bg-blend-hard-light" aria-disabled={isPending}>
                 Sign in
             </Button>
 
