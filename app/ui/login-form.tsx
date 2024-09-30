@@ -74,7 +74,7 @@ export default function LoginForm() {
         <div className="w-full">
           <div>
             <label
-                          className="mb-3 mt-3 block text-l text-white font-sans"
+              className="mb-3 mt-3 block text-l text-white font-sans"
               htmlFor="email"
             >
               Email
@@ -121,7 +121,7 @@ export default function LoginForm() {
 
             <div className='mt-6 text-gray-400 flex justify-center'>
                 <span>Need an account ?</span>
-                  <a href="http://" className='ml-1 text-indigo-600 hover:text-gray-400'>Sign up</a>
+                  <a href="/signup" className='ml-1 text-indigo-600 hover:text-gray-400'>Sign up</a>
             </div>
         <div
           className="flex h-8 items-end space-x-1"

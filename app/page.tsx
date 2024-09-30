@@ -263,7 +263,7 @@ const items = [
             </div>
         </div>
         <div className='relative my-20'>
-            <Carousel
+            {/* <Carousel
               buttons={buttons2}
               autoPlay={true}
               mouseHoverSwitch={false}
@@ -273,7 +273,11 @@ const items = [
               canvasWidth={1540}
               canvasHeight={809}
               className='bg-slate-50/[0] shadow-[0_0_9.697px_0_rgba(0, 0, 0, 0.16)] transition-all duration-300 delay-150 easy-in-out'
-            />
+            /> */}
+            <video autoPlay loop muted>
+              <source src='/find.mp4' type='video/mp4'/>
+              Your browser does not support the video tag.
+            </video>
         </div>
         <div className='flex flex-row gap-20 text-2xl '>
           <div className="flex w-2/5">     

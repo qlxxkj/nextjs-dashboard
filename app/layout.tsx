@@ -1,5 +1,12 @@
 import '@/app/ui/global.css';
 import { inter } from '@/app/ui/fonts';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Titans',
+  description: 'The official Titans website, with AI to create image,video,voice and avatar.',
+  metadataBase: new URL('http://localhost:3000/'),
+};
 
 export default function RootLayout({
   children,
