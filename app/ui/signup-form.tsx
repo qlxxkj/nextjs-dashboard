@@ -12,11 +12,17 @@ import { useRouter } from 'next/router';
 
 
 export default function SignUpForm(){
+    
     const [errorMessage, setErrorMessage] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [isPasswordValid, setIsPasswordValid] = useState(false);
+    const [verificationCode, setVerificationCode] = useState('');
+    const [codeSent, setCodeSent] = useState(false);
 
+
+
+    // 密码校验规则
     const validatePassword = (pass: string) => {
         const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]).{8,}$/;
         return regex.test(pass);
@@ -26,32 +32,55 @@ export default function SignUpForm(){
         setIsPasswordValid(validatePassword(password));
     }, [password]);
 
-
+    // 发送验证码的处理逻辑
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-          const response = await fetch('/api/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-          });
-          const data = await response.json();
-          if (response.ok) {
-            alert(data.message);
-            // 跳转到验证码输入页面
-            const router = useRouter();
-            router.push({
-                pathname: '/verify',
-                query: {email: data.email},
+            const response = await fetch('/api/send_verification_code', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
             });
-          } else {
-            setErrorMessage(data.error || 'Registration failed, please try again.');
-          }
+            const data = await response.json();
+            if (response.ok) {
+                alert(data.message);
+                // 跳转到验证码输入页面，并传递 email 参数
+                const router = useRouter();
+                router.push({
+                    pathname: '/verify',
+                    query: { email: email },
+                });
+            } else {
+                setErrorMessage(data.error || 'Failed to send code, please try again.');
+            }
         } catch (error) {
-          console.error('Registration error:', error);
-          setErrorMessage('Registration error, please try again.');
+            console.error('Error sending code:', error);
+            setErrorMessage('Error sending code, please try again.');
         }
-      };
+    };
+
+    // 验证验证码的处理逻辑
+    // const handleVerifyCode = async (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     try {
+    //         const response = await fetch('/api/verify_code', {
+    //             method: 'POST',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             body: JSON.stringify({ email, password, code: verificationCode }),
+    //         });
+    //         const data = await response.json();
+    //         if (response.ok) {
+    //             alert(data.message);
+    //             const router = useRouter();
+    //             router.push('/dashboard');
+    //         } else {
+    //             setErrorMessage(data.error || 'Verification failed, please try again.');
+    //         }
+    //     } catch (error) {
+    //         console.error('Verification error:', error);
+    //         setErrorMessage('Verification error, please try again.');
+    //     }
+    // };
     
 
     return (
