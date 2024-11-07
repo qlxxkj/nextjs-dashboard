@@ -1,3 +1,4 @@
+'use client'
 // pages/verify_code.tsx
 import { useState } from 'react';
 import { useRouter } from 'next/router';
