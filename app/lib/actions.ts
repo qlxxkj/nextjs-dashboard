@@ -142,3 +142,38 @@ export async function authenticate(
       throw error;
     }
   }
+
+  export async function verifyCode(email: string, code: string) {
+    try {
+      // 验证码格式检查
+      if (!code || code.length !== 6 || !/^\d+$/.test(code)) {
+        return { error: '验证码格式不正确' };
+      }
+  
+      // 从数据库查询验证码记录
+      const result = await sql`
+        SELECT * FROM verification_codes 
+        WHERE email = ${email} 
+        AND code = ${code}
+        AND created_at > NOW() - INTERVAL '5 minutes'
+        AND used = false
+        LIMIT 1
+      `;
+  
+      if (result.rows.length === 0) {
+        return { error: '验证码无效或已过期' };
+      }
+  
+      // 标记验证码为已使用
+      await sql`
+        UPDATE verification_codes 
+        SET used = true 
+        WHERE email = ${email} AND code = ${code}
+      `;
+  
+      return { success: true, message: '验证成功' };
+    } catch (error) {
+      console.error('验证码验证失败:', error);
+      return { error: '验证失败，请稍后重试' };
+    }
+  }
