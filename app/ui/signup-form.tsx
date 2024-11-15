@@ -10,6 +10,18 @@ import TitansLogo from './titans-logo';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
+async function sendVerificationCode(email: string) {
+    const response = await fetch('/api/send_verification_code', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    const data = await response.json();
+    return {
+      success: response.ok,
+      error: !response.ok ? (data.error || 'Failed to send code') : null
+    };
+  }
 
 export default function SignUpForm(){
     
@@ -17,10 +29,8 @@ export default function SignUpForm(){
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [isPasswordValid, setIsPasswordValid] = useState(false);
-    const [verificationCode, setVerificationCode] = useState('');
-    const [codeSent, setCodeSent] = useState(false);
-
-
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
     // 密码校验规则
     const validatePassword = (pass: string) => {
@@ -35,53 +45,60 @@ export default function SignUpForm(){
     // 发送验证码的处理逻辑
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        try {
-            const response = await fetch('/api/send_verification_code', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password }),
-            });
-            const data = await response.json();
-            if (response.ok) {
-                alert(data.message);
-                // 跳转到验证码输入页面，并传递 email 参数
-                const router = useRouter();
-                router.push({
-                    pathname: '/verify',
-                    query: { email: email },
-                });
-            } else {
-                setErrorMessage(data.error || 'Failed to send code, please try again.');
-            }
-        } catch (error) {
-            console.error('Error sending code:', error);
-            setErrorMessage('Error sending code, please try again.');
-        }
-    };
+        setLoading(true);
+        setErrorMessage('');
 
-    // 验证验证码的处理逻辑
-    // const handleVerifyCode = async (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
     //     try {
-    //         const response = await fetch('/api/verify_code', {
+    //         const response = await fetch('/api/send_verification_code', {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
-    //             body: JSON.stringify({ email, password, code: verificationCode }),
+    //             body: JSON.stringify({ email, password }),
     //         });
     //         const data = await response.json();
     //         if (response.ok) {
     //             alert(data.message);
+    //             // 跳转到验证码输入页面，并传递 email 参数
     //             const router = useRouter();
-    //             router.push('/dashboard');
+    //             router.push({
+    //                 pathname: '/verify',
+    //                 query: { email: email },
+    //             });
     //         } else {
-    //             setErrorMessage(data.error || 'Verification failed, please try again.');
+    //             setErrorMessage(data.error || 'Failed to send code, please try again.');
     //         }
     //     } catch (error) {
-    //         console.error('Verification error:', error);
-    //         setErrorMessage('Verification error, please try again.');
+    //         console.error('Error sending code:', error);
+    //         setErrorMessage('Error sending code, please try again.');
     //     }
     // };
-    
+        try {
+            // 1. 验证邮箱和密码
+            if (!email || !password) {
+                setErrorMessage('请填写邮箱和密码');
+                return;
+            }
+
+            if (!isPasswordValid) {
+                setErrorMessage('密码格式不正确');
+                return;
+            }
+
+            // 2. 发送验证码
+            const response = await sendVerificationCode(email);
+            
+            if (response.success) {
+                // 3. 跳转到验证码页面
+                router.push(`/verify?email=${encodeURIComponent(email)}`);
+            } else {
+                setErrorMessage(response.error || '发送验证码失败');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setErrorMessage('发送验证码失败，请稍后重试');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
     <form onSubmit={handleSubmit} className="space-y-3">
@@ -155,6 +172,8 @@ export default function SignUpForm(){
                 name="email"
                 placeholder="Enter your email address"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 />
                 <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
@@ -188,13 +207,20 @@ export default function SignUpForm(){
             </p>
             )}
 
-            <Button className="mt-6 w-full rounded-md h-12 justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:bg-blend-hard-light aria-disabled:opacity-10 aria-disabled:curor-not-allowed" 
-            aria-disabled={!isPasswordValid}
-            
+            <Button 
+            className="mt-6 w-full rounded-md h-12 justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:bg-blend-hard-light aria-disabled:opacity-10 aria-disabled:curor-not-allowed" 
+            aria-disabled={!isPasswordValid || loading}
             type='submit'
             >
-                Sign Up
+                {loading ? 'Sending...' : 'Sign Up'}
             </Button>
+            {/* 错误信息显示 */}
+            {errorMessage && (
+                <div className="flex h-8 items-end space-x-1">
+                    <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+                    <p className="text-sm text-red-500">{errorMessage}</p>
+                </div>
+            )}
 
             <div className='mt-6 text-gray-400 flex justify-center'>
                 <span>Already have an account ?</span>
