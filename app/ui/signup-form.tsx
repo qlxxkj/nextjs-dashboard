@@ -8,7 +8,7 @@ import {
 import { Button } from './components/button';
 import TitansLogo from './titans-logo';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 async function sendVerificationCode(email: string) {
     const response = await fetch('/api/send_verification_code', {
