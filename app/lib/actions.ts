@@ -177,3 +177,25 @@ export async function authenticate(
       return { error: '验证失败，请稍后重试' };
     }
   }
+
+  export async function sendVerificationCode(email: string) {
+    try {
+      const response = await fetch('/api/send_verification_code', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send verification code');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error sending code:', error);
+      throw error;
+    }
+  }

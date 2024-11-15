@@ -2,23 +2,24 @@
 import { v4 as uuidv4 } from 'uuid';
 import { createTransport } from 'nodemailer';
 import { sql } from '@vercel/postgres';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
 
 interface RequestBody {
   email: string;
   password: string;
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: '仅支持POST请求' });
-  }
-
-  const { email, password }: RequestBody = req.body;
-  const verificationCode = Math.floor(10000000 + Math.random() * 90000000); // 生成8位验证码
-  const expiresAt = new Date(Date.now() + 30 * 60 * 1000).toISOString(); // 将Date转为字符串格式
-
+export async function POST(request: Request) {
+  // if (req.method !== 'POST') {
+  //   return res.status(405).json({ message: '仅支持POST请求' });
+  // }
   try {
+    const { email } = await request.json();
+
+    // 生成8位数字验证码
+    const verificationCode = Math.floor(10000000 + Math.random() * 90000000); // 生成8位验证码
+    const expiresAt = new Date(Date.now() + 30 * 60 * 1000).toISOString(); // 将Date转为字符串格式
+
     // 使用 Vercel Postgres 插入验证码
     await sql`
       INSERT INTO verification_codes (id, email, verification_code, expires_at) 
@@ -42,9 +43,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       text: `您的验证码是：${verificationCode}，30分钟内有效。`,
     });
 
-    res.status(200).json({ message: '验证码已发送至您的邮箱' });
+    // res.status(200).json({ message: '验证码已发送至您的邮箱' });
+    return NextResponse.json({ success: true });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: '发送验证码失败' });
+    console.error('发送验证码失败:', error);
+    // res.status(500).json({ message: '发送验证码失败' });
+    return NextResponse.json(
+      { error: '发送验证码失败，请稍后重试' },
+      { status: 500 }
+    );
   }
 }
