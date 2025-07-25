@@ -3,8 +3,8 @@ import { inter } from '@/app/ui/fonts';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Titans',
-  description: 'The official Titans website, with AI to create image,video,voice and avatar.',
+  title: 'VidSpark· 一键创意 · 智能混剪 · 多平台同步',
+  description: 'VidSpark· 一键创意 · 智能混剪 · 多平台同步',
   metadataBase: new URL('http://localhost:3000/'),
 };
 

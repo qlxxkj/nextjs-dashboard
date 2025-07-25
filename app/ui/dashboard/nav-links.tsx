@@ -14,7 +14,7 @@ import clsx from 'clsx';
 const links = [
   { name: 'Home', href: '/dashboard', icon: HomeIcon },
   {
-    name: '视频混剪',href: '/dashboard/invoices',icon: DocumentDuplicateIcon,
+    name: '智能混剪',href: '/dashboard/invoices',icon: DocumentDuplicateIcon,
   },
   { name: '投放分发', href: '/dashboard/customers', icon: UserGroupIcon },
 ];

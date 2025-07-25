@@ -6,16 +6,14 @@ import { signOut } from '@/auth';
 
 export default function SideNav() {
   return (
-    <div className="flex h-full flex-col px-3 py-4 md:px-2   shadow-[5px_0_10px_-2px_rgba(0,0,0,0.1)] 
-  md:shadow-[10px_0_15px_-3px_rgba(0,0,0,0.1)]">
+    <div className="flex h-full flex-col px-3 py-4 md:px-2 shadow-[5px_0_10px_-2px_rgba(0,0,0,0.1)] md:shadow-[10px_0_15px_-3px_rgba(0,0,0,0.1)]">
       <Link
-        className="mb-2 flex h-20 items-end justify-start rounded-md p-4 md:h-20"
+        className="mb-2 flex h-48 items-end justify-start rounded-md p-4 md:h-24"
         href="/"
       >
-        <div className="w-12 text-black md:w-12">
+        <div className="w-48 text-black md:w-24">
           <TitansLogo />
         </div>
-        Titans
       </Link>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <NavLinks />
